@@ -1,9 +1,10 @@
 name: Java CI
 
-# Trigger the workflow on release creation
 on:
   release:
-    types: [created]
+    types: [ created ]
+  workflow_dispatch:
+
 
 jobs:
   build:
@@ -17,17 +18,15 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
-
       - name: Build with Maven
         run: mvn --batch-mode --update-snapshots verify
 
-      # This is the new step to upload the build artifact as a release asset
       - name: Upload Release Asset
         uses: actions/upload-release-asset@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }} # GitHub automatically creates this token
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ github.event.release.upload_url }} # The upload URL for the release assets
-          asset_path: ./target/nuclei-burp-plugin-0.0.1-SNAPSHOT-jar-with-dependencies.jar #update version before release
-          asset_name: nuclei-burp-plugin-0.0.1.jar #update version before release
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./target/nuclei-burp-plugin-1.1.3-SNAPSHOT-jar-with-dependencies.jar #update version before release
+          asset_name: nuclei-burp-plugin-1.1.3.jar #update version before release
           asset_content_type: application/java-archive
