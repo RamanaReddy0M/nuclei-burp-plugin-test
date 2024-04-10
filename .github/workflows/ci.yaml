@@ -29,5 +29,5 @@ jobs:
         with:
           upload_url: ${{ github.event.release.upload_url }} # The upload URL for the release assets
           asset_path: ./target/nuclei-burp-plugin-0.0.1-SNAPSHOT-jar-with-dependencies.jar #update version before release
-          asset_name: nuclei-burp-plugin-0.0.1-SNAPSHOT-jar-with-dependencies.jar #update version before release
+          asset_name: nuclei-burp-plugin-0.0.1.jar #update version before release
           asset_content_type: application/java-archive
